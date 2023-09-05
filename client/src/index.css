@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .bg-clip {
+    clip-path: polygon(100% 100%, 0% 100%, 0% 20%, 100% 80%);
+  }
+  .border-clip {
+    clip-path: polygon(98% 81%, 2% 23%, 2% 21.2%, 98% 79%);
+  }
+  .cutter-clip {
+    clip-path: polygon(88% 76%, 12% 30%, 12% 27%, 88% 72.9%);
+  }
+}
+
+@layer components {
+  h1 {
+    @apply text-5xl font-black sm:text-4xl sm:font-bold;
+  }
+  h2 {
+    @apply text-2xl font-semibold;
+  }
+  h3 {
+    @apply text-lg font-bold;
+  }
+  h4 {
+    @apply text-sm font-medium;
+  }
+  h5 {
+    @apply text-base font-light;
+  }
+  h6 {
+    @apply text-base font-light;
+  }
+  p {
+    @apply text-sm font-light;
+  }
+  li {
+    @apply text-base font-light;
+  }
+  a {
+    @apply text-base font-light;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  transition: all 0.25s;
+}
+
+path,
+svg,
+i::before,
+i::after {
+  transition: initial;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+  position: relative;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd,
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+button,
+input {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
