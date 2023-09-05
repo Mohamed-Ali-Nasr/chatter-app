@@ -196,7 +196,7 @@ const ChatContainer = () => {
                             <p className="font-Inter">{message}</p>
 
                             <span className="hover:underline text-[0.65rem] italic text-gray-300">
-                              <Moment fromNow>{new Date(createdAt)}</Moment>
+                              <Moment fromNow>{createdAt}</Moment>
                             </span>
                           </div>
                         ) : (

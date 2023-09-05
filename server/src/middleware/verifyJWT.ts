@@ -22,7 +22,9 @@ export const verifyJWT = (req: IRequest, res: Response, next: NextFunction) => {
           error,
         });
       } else {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         req.userId = (decode as any).id;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         req.username = (decode as any).username;
 
         if (!req.userId) {

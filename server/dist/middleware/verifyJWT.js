@@ -20,7 +20,9 @@ const verifyJWT = (req, res, next) => {
                 });
             }
             else {
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 req.userId = decode.id;
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 req.username = decode.username;
                 if (!req.userId) {
                     throw (0, http_errors_1.default)(401, "Invalid token.");
