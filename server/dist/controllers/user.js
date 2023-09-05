@@ -80,7 +80,9 @@ const getUserRooms = (req, res, next) => __awaiter(void 0, void 0, void 0, funct
                     }
                     if (((_b = roomUser._id) === null || _b === void 0 ? void 0 : _b.toString()) === user._id.toString() &&
                         roomUser.role !== "7610") {
+                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
                         delete room._doc.inviteList;
+                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
                         delete room._doc.blackList;
                     }
                 });
@@ -111,6 +113,7 @@ const userAcceptInvite = (req, res, next) => __awaiter(void 0, void 0, void 0, f
         if (!invitedRoom)
             throw (0, http_errors_1.default)(404, "not found any room with this id");
         const foundedUser = yield User_1.default.findOne({ _id: userId });
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         yield invitedRoom._doc.inviteList.remove([userId]);
         invitedRoom.users.push({
             userId,
@@ -139,6 +142,7 @@ const userIgnoreInvite = (req, res, next) => __awaiter(void 0, void 0, void 0, f
         });
         if (!invitedRoom)
             throw (0, http_errors_1.default)(404, "not found any room with this id");
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         yield invitedRoom[0]._doc.inviteList.remove([userId]);
         yield invitedRoom[0].save();
         res.status(200).json({

@@ -88,7 +88,9 @@ export const getUserRooms = async (
             roomUser._id?.toString() === user._id.toString() &&
             roomUser.role !== "7610"
           ) {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             delete (room as any)._doc.inviteList;
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             delete (room as any)._doc.blackList;
           }
         });
@@ -129,6 +131,7 @@ export const userAcceptInvite = async (
 
     const foundedUser = await User.findOne({ _id: userId });
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     await (invitedRoom as any)._doc.inviteList.remove([userId]);
 
     invitedRoom.users.push({
@@ -166,6 +169,7 @@ export const userIgnoreInvite = async (
     if (!invitedRoom)
       throw createHttpError(404, "not found any room with this id");
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     await (invitedRoom as any)[0]._doc.inviteList.remove([userId]);
 
     await invitedRoom[0].save();

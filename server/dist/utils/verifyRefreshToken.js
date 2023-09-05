@@ -19,6 +19,7 @@ const UserToken_js_1 = __importDefault(require("../schemas/UserToken.js"));
 const http_errors_1 = __importDefault(require("http-errors"));
 const verifyRefreshToken = (refreshToken) => {
     const privateKey = validateEnv_1.default.REFRESH_TOKEN;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     UserToken_js_1.default.findOne({ token: refreshToken }, (err, doc) => __awaiter(void 0, void 0, void 0, function* () {
         if (!doc)
             throw (0, http_errors_1.default)(401, "Invalid refresh token.");

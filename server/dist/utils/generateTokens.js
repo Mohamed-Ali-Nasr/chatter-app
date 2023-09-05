@@ -31,6 +31,7 @@ const generateTokens = (user) => __awaiter(void 0, void 0, void 0, function* () 
             yield userToken.deleteOne();
         yield new UserToken_1.default({ userId: user._id, token: refreshToken }).save();
         return { accessToken, refreshToken };
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
     }
     catch (err) {
         return err;

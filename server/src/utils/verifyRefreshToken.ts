@@ -6,6 +6,7 @@ import createHttpError from "http-errors";
 export const verifyRefreshToken = (refreshToken: string) => {
   const privateKey = env.REFRESH_TOKEN;
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   UserToken.findOne({ token: refreshToken }, async (err: any, doc: any) => {
     if (!doc) throw createHttpError(401, "Invalid refresh token.");
 

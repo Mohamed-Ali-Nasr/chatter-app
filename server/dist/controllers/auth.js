@@ -74,7 +74,9 @@ const refreshToken = (req, res, next) => __awaiter(void 0, void 0, void 0, funct
             }
             else {
                 const user = yield User_1.default.findOne({
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
                     _id: decode.id,
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
                     username: decode.username,
                 }).exec();
                 if (!user)
@@ -89,7 +91,7 @@ const refreshToken = (req, res, next) => __awaiter(void 0, void 0, void 0, funct
     }
 });
 exports.refreshToken = refreshToken;
-const logout = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+const logout = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const cookies = req.cookies;
     if (!(cookies === null || cookies === void 0 ? void 0 : cookies.jwt))
         return res.sendStatus(204);

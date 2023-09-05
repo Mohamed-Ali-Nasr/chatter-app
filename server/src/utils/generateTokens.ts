@@ -25,6 +25,7 @@ export const generateTokens = async (
     await new UserToken({ userId: user._id, token: refreshToken }).save();
 
     return { accessToken, refreshToken };
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (err: any) {
     return err;
   }

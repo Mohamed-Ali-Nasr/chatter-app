@@ -99,7 +99,9 @@ export const refreshToken: RequestHandler = async (req, res, next) => {
         throw createHttpError(403, "Forbidden");
       } else {
         const user = await User.findOne({
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           _id: (decode as any).id,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           username: (decode as any).username,
         }).exec();
 
@@ -115,7 +117,7 @@ export const refreshToken: RequestHandler = async (req, res, next) => {
   }
 };
 
-export const logout: RequestHandler = async (req, res, next) => {
+export const logout: RequestHandler = async (req, res) => {
   const cookies = req.cookies;
 
   if (!cookies?.jwt) return res.sendStatus(204);
