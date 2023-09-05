@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "ES2016",
     "module": "NodeNext",
-    "moduleResolution": "Node",
+    "moduleResolution": "node",
     "rootDir": "./src",
     "outDir": "./dist",
     "esModuleInterop": true,
@@ -10,12 +10,7 @@
     "strict": true,
     "skipLibCheck": true,
     "noImplicitAny": true,
-    "noEmit": true,
     "allowSyntheticDefaultImports": true
   },
-  "include": ["src/**/*"],
-  "ts-node": {
-    "esm": true,
-    "experimentalSpecifierResolution": "node"
-  }
+  "include": ["src/**/*"]
 }

@@ -35,5 +35,8 @@
 
 //! to do it correctly you must first change (module) in tsconfig.ts file with (ES2016), like this:
 //   "compilerOptions": {"module": "ES2016"}
+//! and then add (ts-node) property to tsconfig.ts file, like this:
+//   "ts-node": {"esm": true, "experimentalSpecifierResolution": "node"}
+
 //! next you must change (type) in package.json file to (module), like this:
 // under (main) property you can write => {"type": "module",}
