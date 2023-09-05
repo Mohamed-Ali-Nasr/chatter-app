@@ -183,7 +183,7 @@ const ChatContainer = () => {
                             key={_id}
                           >
                             {img && (
-                              <div className="p-3 w-48 h-48 mx-auto">
+                              <div className="w-48 h-48 p-3 mx-auto">
                                 <img
                                   src={`${
                                     import.meta.env.VITE_BASE_URL
@@ -196,7 +196,7 @@ const ChatContainer = () => {
                             <p className="font-Inter">{message}</p>
 
                             <span className="hover:underline text-[0.65rem] italic text-gray-300">
-                              <Moment fromNow>{createdAt}</Moment>
+                              <Moment fromNow>{new Date(createdAt)}</Moment>
                             </span>
                           </div>
                         ) : (
@@ -208,7 +208,7 @@ const ChatContainer = () => {
                               {senderName}
                             </h5>
                             {img && (
-                              <div className="p-3 w-48 h-48 mx-auto">
+                              <div className="w-48 h-48 p-3 mx-auto">
                                 <img
                                   src={`${
                                     import.meta.env.VITE_BASE_URL
@@ -217,7 +217,7 @@ const ChatContainer = () => {
                                 />
                               </div>
                             )}
-                            <p className="font-Inter leading-3 font-semibold">
+                            <p className="font-Inter font-semibold leading-3">
                               {message}
                             </p>
                             <span className="hover:underline text-[0.65rem] italic text-main-blue">
