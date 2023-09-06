@@ -100,6 +100,7 @@ const logout = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         secure: false,
         httpOnly: false,
         sameSite: true,
+        maxAge: 0,
     });
     res.sendStatus(200);
 });

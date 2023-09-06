@@ -127,6 +127,7 @@ export const logout: RequestHandler = async (req, res) => {
     secure: false,
     httpOnly: false,
     sameSite: true,
+    maxAge: 0,
   } as CookieOptions);
 
   res.sendStatus(200);
