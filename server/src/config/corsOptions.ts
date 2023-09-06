@@ -3,7 +3,6 @@ import { allowedOrigins } from "./allowedOrigins";
 
 export const corsOptions: CorsOptions = {
   origin: (origin, callback) => {
-    console.log("🚀 ~ file: corsOptions.ts:6 ~ origin:", origin);
     if (allowedOrigins.indexOf(origin as string) !== -1 || !origin) {
       callback(null, true);
     } else {
