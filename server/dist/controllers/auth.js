@@ -55,10 +55,8 @@ const login = (req, res, next) => __awaiter(void 0, void 0, void 0, function* ()
         const { accessToken, refreshToken } = yield (0, generateTokens_1.generateTokens)(user);
         res.cookie("jwt", refreshToken, {
             maxAge: 24 * 60 * 60 * 1000,
-            path: "/",
             secure: true,
             httpOnly: true,
-            sameSite: "none",
         });
         res.status(201).json({ accessToken });
     }
@@ -102,9 +100,8 @@ const logout = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         return res.sendStatus(204);
     res.clearCookie("jwt", {
         path: "/",
-        sameSite: true,
-        secure: false,
-        httpOnly: false,
+        secure: true,
+        httpOnly: true,
     });
     res.sendStatus(200);
 });

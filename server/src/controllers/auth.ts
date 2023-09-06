@@ -76,10 +76,8 @@ export const login: RequestHandler<
 
     res.cookie("jwt", refreshToken, {
       maxAge: 24 * 60 * 60 * 1000,
-      path: "/",
       secure: true,
       httpOnly: true,
-      sameSite: "none",
     } as CookieOptions);
 
     res.status(201).json({ accessToken });
@@ -126,9 +124,8 @@ export const logout: RequestHandler = async (req, res) => {
 
   res.clearCookie("jwt", {
     path: "/",
-    sameSite: true,
-    secure: false,
-    httpOnly: false,
+    secure: true,
+    httpOnly: true,
   });
 
   res.sendStatus(200);
