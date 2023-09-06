@@ -35,8 +35,6 @@ const getUserInviteList = (req, res, next) => __awaiter(void 0, void 0, void 0, 
         const invitedRooms = yield Room_1.default.find({
             inviteList: { $in: [new mongoose_1.default.Types.ObjectId(userId)] },
         }).select("name _id");
-        if (invitedRooms.length === 0)
-            return res.status(404).json({ message: "Room not found!" });
         return res.status(200).json(invitedRooms);
     }
     catch (error) {

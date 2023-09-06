@@ -31,9 +31,6 @@ export const getUserInviteList = async (
       inviteList: { $in: [new mongoose.Types.ObjectId(userId)] },
     }).select("name _id");
 
-    if (invitedRooms.length === 0)
-      return res.status(404).json({ message: "Room not found!" });
-
     return res.status(200).json(invitedRooms);
   } catch (error) {
     next(error);
