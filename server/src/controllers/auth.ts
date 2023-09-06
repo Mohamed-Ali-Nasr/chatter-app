@@ -123,7 +123,11 @@ export const logout: RequestHandler = async (req, res) => {
 
   if (!cookies?.jwt) return res.sendStatus(204);
 
-  res.clearCookie("jwt");
+  res.clearCookie("jwt", {
+    secure: true,
+    httpOnly: true,
+    sameSite: "none",
+  } as CookieOptions);
 
   res.sendStatus(200);
 };
