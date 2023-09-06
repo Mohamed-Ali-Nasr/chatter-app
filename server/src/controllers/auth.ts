@@ -75,8 +75,6 @@ export const login: RequestHandler<
     const { accessToken, refreshToken } = await generateTokens(user);
 
     res.cookie("jwt", refreshToken, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
       maxAge: 24 * 60 * 60 * 1000,
     } as CookieOptions);
 

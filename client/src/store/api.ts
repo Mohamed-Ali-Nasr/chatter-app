@@ -11,10 +11,6 @@ const baseQuery = fetchBaseQuery({
 
   credentials: "include",
 
-  redirect: "follow",
-
-  mode: "cors",
-
   prepareHeaders: (headers, { getState }) => {
     const token = (getState() as RootState).auth.token;
 

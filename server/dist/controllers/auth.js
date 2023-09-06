@@ -54,8 +54,6 @@ const login = (req, res, next) => __awaiter(void 0, void 0, void 0, function* ()
             throw (0, http_errors_1.default)(400, "Invalid email or password.");
         const { accessToken, refreshToken } = yield (0, generateTokens_1.generateTokens)(user);
         res.cookie("jwt", refreshToken, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === "production",
             maxAge: 24 * 60 * 60 * 1000,
         });
         res.status(201).json({ accessToken });
