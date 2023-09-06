@@ -4,7 +4,6 @@ import { CookieOptions, RequestHandler } from "express";
 import User from "../schemas/User";
 import createHttpError from "http-errors";
 import { generateTokens } from "../utils/generateTokens";
-import { createTokenOptions } from "../utils/cookies";
 import JWT from "jsonwebtoken";
 import env from "../utils/validateEnv";
 
@@ -76,7 +75,8 @@ export const login: RequestHandler<
     const { accessToken, refreshToken } = await generateTokens(user);
 
     res.cookie("jwt", refreshToken, {
-      ...createTokenOptions(),
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
       maxAge: 24 * 60 * 60 * 1000,
     } as CookieOptions);
 
@@ -122,13 +122,7 @@ export const logout: RequestHandler = async (req, res) => {
 
   if (!cookies?.jwt) return res.sendStatus(204);
 
-  res.clearCookie("jwt", {
-    path: "/",
-    secure: false,
-    httpOnly: false,
-    sameSite: true,
-    maxAge: 0,
-  } as CookieOptions);
+  res.clearCookie("jwt", { sameSite: "none", secure: true } as CookieOptions);
 
   res.sendStatus(200);
 };

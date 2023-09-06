@@ -18,7 +18,6 @@ const bcrypt_1 = __importDefault(require("bcrypt"));
 const User_1 = __importDefault(require("../schemas/User"));
 const http_errors_1 = __importDefault(require("http-errors"));
 const generateTokens_1 = require("../utils/generateTokens");
-const cookies_1 = require("../utils/cookies");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const validateEnv_1 = __importDefault(require("../utils/validateEnv"));
 const register = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
@@ -54,7 +53,11 @@ const login = (req, res, next) => __awaiter(void 0, void 0, void 0, function* ()
         if (!isPasswordValid)
             throw (0, http_errors_1.default)(400, "Invalid email or password.");
         const { accessToken, refreshToken } = yield (0, generateTokens_1.generateTokens)(user);
-        res.cookie("jwt", refreshToken, Object.assign(Object.assign({}, (0, cookies_1.createTokenOptions)()), { maxAge: 24 * 60 * 60 * 1000 }));
+        res.cookie("jwt", refreshToken, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            maxAge: 24 * 60 * 60 * 1000,
+        });
         res.status(201).json({ accessToken });
     }
     catch (error) {
@@ -95,13 +98,7 @@ const logout = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const cookies = req.cookies;
     if (!(cookies === null || cookies === void 0 ? void 0 : cookies.jwt))
         return res.sendStatus(204);
-    res.clearCookie("jwt", {
-        path: "/",
-        secure: false,
-        httpOnly: false,
-        sameSite: true,
-        maxAge: 0,
-    });
+    res.clearCookie("jwt", { sameSite: "none", secure: true });
     res.sendStatus(200);
 });
 exports.logout = logout;
