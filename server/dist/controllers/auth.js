@@ -57,6 +57,7 @@ const login = (req, res, next) => __awaiter(void 0, void 0, void 0, function* ()
             maxAge: 24 * 60 * 60 * 1000,
             secure: true,
             httpOnly: true,
+            sameSite: "none",
         });
         res.status(201).json({ accessToken });
     }
@@ -98,11 +99,7 @@ const logout = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const cookies = req.cookies;
     if (!(cookies === null || cookies === void 0 ? void 0 : cookies.jwt))
         return res.sendStatus(204);
-    res.clearCookie("jwt", {
-        path: "/",
-        secure: true,
-        httpOnly: true,
-    });
+    res.clearCookie("jwt");
     res.sendStatus(200);
 });
 exports.logout = logout;

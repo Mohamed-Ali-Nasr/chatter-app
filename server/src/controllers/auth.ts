@@ -78,6 +78,7 @@ export const login: RequestHandler<
       maxAge: 24 * 60 * 60 * 1000,
       secure: true,
       httpOnly: true,
+      sameSite: "none",
     } as CookieOptions);
 
     res.status(201).json({ accessToken });
@@ -122,11 +123,7 @@ export const logout: RequestHandler = async (req, res) => {
 
   if (!cookies?.jwt) return res.sendStatus(204);
 
-  res.clearCookie("jwt", {
-    path: "/",
-    secure: true,
-    httpOnly: true,
-  });
+  res.clearCookie("jwt");
 
   res.sendStatus(200);
 };
