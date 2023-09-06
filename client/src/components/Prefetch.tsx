@@ -46,14 +46,6 @@ const Prefetch = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAuthLoading]);
 
-  useEffect(() => {
-    window.addEventListener("load", () => navigate("/"));
-
-    return () => {
-      window.removeEventListener("load", () => navigate("/"));
-    };
-  });
-
   let content: React.ReactNode;
 
   if (

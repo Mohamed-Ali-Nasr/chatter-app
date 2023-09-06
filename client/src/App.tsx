@@ -9,14 +9,31 @@ import Home from "pages/Home";
 import SignIn from "pages/SignIn";
 import SignUp from "pages/SignUp";
 import { useEffect } from "react";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 
 const App = () => {
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     window.scrollTo({ top: 0 });
   }, [location]);
+
+  useEffect(() => {
+    if (location.pathname.startsWith("/chat"))
+      window.addEventListener("load", () => {
+        navigate("/");
+        window.location.reload();
+      });
+
+    return () => {
+      window.removeEventListener("load", () => {
+        navigate("/");
+        window.location.reload();
+      });
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location.pathname]);
 
   return (
     <>
