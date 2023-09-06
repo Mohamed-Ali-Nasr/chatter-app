@@ -95,7 +95,12 @@ const logout = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const cookies = req.cookies;
     if (!(cookies === null || cookies === void 0 ? void 0 : cookies.jwt))
         return res.sendStatus(204);
-    res.clearCookie("jwt", (0, cookies_1.createTokenOptions)());
+    res.clearCookie("jwt", {
+        path: "/",
+        secure: false,
+        httpOnly: false,
+        sameSite: true,
+    });
     res.sendStatus(200);
 });
 exports.logout = logout;
