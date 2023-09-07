@@ -232,6 +232,14 @@ mongoose.connection.on("error", (error: Error) => console.log(error));
 app.use("/images", express.static(path.join(__dirname, "public/images")));
 app.use("/api", routes());
 
+app.get("/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../../client/index.html"), (err) => {
+    if (err) {
+      res.status(500).send(err);
+    }
+  });
+});
+
 /* Error Handling */
 app.use((req, res, next) => {
   next(createHttpError(404, "Endpoint not found"));

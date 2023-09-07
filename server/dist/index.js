@@ -191,6 +191,13 @@ mongoose_1.default.connection.on("error", (error) => console.log(error));
 /* Routes */
 app.use("/images", express_1.default.static(path_1.default.join(__dirname, "public/images")));
 app.use("/api", (0, routes_1.default)());
+app.get("/*", (req, res) => {
+    res.sendFile(path_1.default.join(__dirname, "../../client/index.html"), (err) => {
+        if (err) {
+            res.status(500).send(err);
+        }
+    });
+});
 /* Error Handling */
 app.use((req, res, next) => {
     next((0, http_errors_1.default)(404, "Endpoint not found"));
