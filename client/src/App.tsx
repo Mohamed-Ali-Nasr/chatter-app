@@ -15,12 +15,13 @@ const App = () => {
     <>
       <AnimatePresence mode="wait">
         <Routes>
-          <Route path="/" element={<Layout />}>
+          <Route id="home" path="/" element={<Layout />}>
             <Route element={<PersistLogin />}>
               <Route index element={<Home />} />
 
               <Route
                 path="sign-in"
+                id="sign-in"
                 element={
                   <Account>
                     <SignIn />
@@ -30,6 +31,7 @@ const App = () => {
 
               <Route
                 path="sign-up"
+                id="sign-up"
                 element={
                   <Account>
                     <SignUp />
@@ -38,7 +40,7 @@ const App = () => {
               />
 
               <Route element={<Prefetch />}>
-                <Route path="/chat" element={<Chat />} />
+                <Route id="chat" path="/chat" element={<Chat />} />
               </Route>
             </Route>
           </Route>
