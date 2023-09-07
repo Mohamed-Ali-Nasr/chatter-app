@@ -8,20 +8,13 @@ import Chat from "pages/Chat";
 import Home from "pages/Home";
 import SignIn from "pages/SignIn";
 import SignUp from "pages/SignUp";
-import { useEffect } from "react";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
 const App = () => {
-  const location = useLocation();
-
-  useEffect(() => {
-    window.scrollTo({ top: 0 });
-  }, [location]);
-
   return (
     <>
       <AnimatePresence mode="wait">
-        <Routes location={location} key={location.pathname}>
+        <Routes>
           <Route path="/" element={<Layout />}>
             <Route element={<PersistLogin />}>
               <Route index element={<Home />} />
