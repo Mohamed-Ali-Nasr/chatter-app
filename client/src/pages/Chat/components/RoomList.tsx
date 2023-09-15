@@ -59,11 +59,12 @@ const RoomList = () => {
   };
 
   useEffect(() => {
-    socket.on("get invite for user", ({ _id, name }: TUserInviteList) => {
+    socket.on("get invite for user", (inviteUser: TUserInviteList) => {
       const inviteData = {
-        _id,
-        name,
+        _id: inviteUser._id,
+        name: inviteUser.name,
       };
+
       dispatch(userActions.addToInviteList(inviteData));
     });
 

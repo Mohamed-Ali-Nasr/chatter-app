@@ -74,9 +74,12 @@ const io = new socket_io_1.Server(server, {
     pingTimeout: 6000,
     cors: {
         origin: validateEnv_1.default.FRONT_END_URL,
+        credentials: true,
+        methods: ["GET", "POST"],
     },
 });
 io.on("connection", (socket) => {
+    socket.removeAllListeners();
     console.log("Connected to socket.io");
     socket.on("setup", (userId) => {
         socket.join(userId);
@@ -111,7 +114,7 @@ io.on("connection", (socket) => {
     });
     socket.on("user kick", (receiveData) => {
         const { RoomId, userId } = receiveData;
-        socket.in(userId).emit("user kicked", RoomId);
+        socket.in(userId).emit("user kicked", { roomId: RoomId });
     });
     socket.on("remove from room invite list", (receiveData) => __awaiter(void 0, void 0, void 0, function* () {
         const { roomId, userId } = receiveData;
@@ -137,7 +140,7 @@ io.on("connection", (socket) => {
     }));
     socket.on("admin cancel invite", (receiveData) => {
         const { roomId, userId } = receiveData;
-        socket.to(userId).emit("invite canceled by admin", roomId);
+        socket.to(userId).emit("invite canceled by admin", { roomId });
     });
     socket.on("ban user", (receiveData) => {
         const { roomId, userId, roomName } = receiveData;

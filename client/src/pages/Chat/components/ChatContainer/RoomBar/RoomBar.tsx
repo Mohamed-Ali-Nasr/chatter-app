@@ -41,9 +41,12 @@ const RoomBar = ({ RoomId, isMenuOpen, setIsMenuOpen }: Props) => {
       setIsModerator(true);
     }
 
-    socket.on("invite canceled by admin", (roomId: string) => {
-      dispatch(userActions.ignoreInvite(roomId));
-    });
+    socket.on(
+      "invite canceled by admin",
+      (canceledData: { roomId: string }) => {
+        dispatch(userActions.ignoreInvite(canceledData.roomId));
+      }
+    );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -65,7 +68,7 @@ const RoomBar = ({ RoomId, isMenuOpen, setIsMenuOpen }: Props) => {
           <HiOutlineChevronLeft
             width={32}
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="mr-3 dark:text-white cursor-pointer"
+            className="dark:text-white mr-3 cursor-pointer"
           />
         )}
 

@@ -68,7 +68,7 @@ const RoomBarMenu = ({ roomUser, isModerator, RoomId, Room }: Props) => {
       </h3>
 
       {roomUser.role === "1769" && (
-        <span className="dark:text-main-light-purple text-main-blue text-left ml-auto relative inline-block">
+        <span className="dark:text-main-light-purple text-main-blue relative inline-block ml-auto text-left">
           Admin
         </span>
       )}

@@ -24,7 +24,7 @@ const Chat = () => {
     document.title = "Chatter";
 
     socket.onAny((eventName, ...args) => {
-      console.log(eventName, args);
+      console.log(eventName, ...args);
     });
 
     socket.emit("setup", currentUserId);
@@ -71,7 +71,13 @@ const Chat = () => {
       }
     );
 
-    socket.on("new message", ({ messageData }: { messageData: IMessage }) => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  useEffect(() => {
+    socket.on("new message", (messageData: IMessage) => {
       dispatch(
         userActions.addRoomMessage({
           roomId: messageData.roomId,
@@ -80,6 +86,7 @@ const Chat = () => {
       );
     });
 
+    return () => socket.off("new message").off();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

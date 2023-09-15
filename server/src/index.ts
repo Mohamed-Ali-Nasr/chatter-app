@@ -44,10 +44,13 @@ const io = new Server(server, {
   pingTimeout: 6000,
   cors: {
     origin: env.FRONT_END_URL,
+    credentials: true,
+    methods: ["GET", "POST"],
   },
 });
 
 io.on("connection", (socket) => {
+  socket.removeAllListeners();
   console.log("Connected to socket.io");
 
   socket.on("setup", (userId: string) => {
@@ -96,7 +99,7 @@ io.on("connection", (socket) => {
   socket.on("user kick", (receiveData: { RoomId: string; userId: string }) => {
     const { RoomId, userId } = receiveData;
 
-    socket.in(userId).emit("user kicked", RoomId);
+    socket.in(userId).emit("user kicked", { roomId: RoomId });
   });
 
   socket.on(
@@ -142,7 +145,7 @@ io.on("connection", (socket) => {
     (receiveData: { roomId: string; userId: string }) => {
       const { roomId, userId } = receiveData;
 
-      socket.to(userId).emit("invite canceled by admin", roomId);
+      socket.to(userId).emit("invite canceled by admin", { roomId });
     }
   );
 

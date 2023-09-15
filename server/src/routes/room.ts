@@ -20,12 +20,7 @@ export default (router: Router) => {
 
   router.post("/room/delete", verifyJWT, isOwner("delete"), deleteRoom);
 
-  router.post(
-    "/room/delete",
-    verifyJWT,
-    isOwner("edit-room-name"),
-    editRoomName
-  );
+  router.post("/room/name", verifyJWT, isOwner("edit-room-name"), editRoomName);
 
   router.put(
     "/room/invite",
